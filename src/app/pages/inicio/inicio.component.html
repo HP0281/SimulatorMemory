@@ -1,0 +1,15 @@
+<div class="container">
+  <mat-card class="card">
+    <mat-card-header class="header">
+      <mat-card-title>Simulador de memoria de procesos</mat-card-title>
+      <mat-card-subtitle>Primero configuraremos nuestro entorno</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content class="content">
+      <app-configuration-environment (memory)="AsignValues($event, 'memory')" (unitTime)="AsignValues($event, 'time')"></app-configuration-environment>
+    </mat-card-content>
+    <mat-card-actions class="actions">
+      <button mat-button class="cancel">Cancelar</button>
+      <button mat-button (click)="saveParams()" [disabled]="memory ===0 || time === 0">Continuar</button>
+    </mat-card-actions>
+  </mat-card>
+</div>

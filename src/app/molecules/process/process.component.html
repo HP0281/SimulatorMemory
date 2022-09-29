@@ -1,0 +1,52 @@
+<div class="container" [formGroup]="formProcess">
+<div class="row">
+  <div class="column">
+    <div class="row">
+      <div class="column">
+        <div class="formulario" *ngIf="!startP">
+          <h4>Crear proceso</h4>
+          <mat-form-field appearance="outline">
+            <mat-label>Tamaño del proceso</mat-label>
+            <input type="number" matInput formControlName="size">
+            <mat-hint *ngIf="formProcess.get('size')?.value > memory">El proceso excede el tamaño de memoria</mat-hint>
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Prioridad</mat-label>
+            <input type="number" matInput formControlName="priority">
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Tiempo de ejecucion</mat-label>
+            <input type="number" matInput formControlName="time">
+          </mat-form-field>
+          <div class="action">
+            <button mat-button (click)="create()" [disabled]="formProcess.get('size')?.value > memory">Crear</button>
+          </div>
+          <div class="start">
+            <button mat-button (click)="start();">Comenzar Simulacion</button>
+          </div>
+        </div>
+        <div class="table">
+          <h3>Escenario planteado</h3>
+          <app-lista [dataSource]="listainicial" type="inicial"></app-lista>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="column" *ngIf="startP">
+    <div class="row simulator">
+      <div class="column ready" *ngIf="!shedule.finish">
+        <h3>Procesos en estado 'en espera'</h3>
+        <app-list-process [dataSource]="dataReadys" type="ready"></app-list-process>
+      </div>
+      <div class="column memory">
+        <h3>Comportamiento de la memoria</h3>
+        <app-list-memory></app-list-memory>
+      </div>
+      <div class="column ready" *ngIf="shedule.finish">
+        <h3>Resultado de la simulacion</h3>
+        <app-list-process [dataSource]="dataFinish" type="finish"></app-list-process>
+      </div>
+    </div>
+  </div>
+</div>
+</div>

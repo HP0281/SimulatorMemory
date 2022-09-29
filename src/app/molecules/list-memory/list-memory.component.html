@@ -1,0 +1,12 @@
+<div class="admin">
+  <div class="pagination memory" *ngFor="let process of list;" [ngStyle]="{'height':(100/list.length)+'%'}">
+     <div class="empty" *ngIf="process.state === 'empty'" >
+      <h3>Espacio disponible <strong>{{process.size}}</strong></h3>
+     </div>
+     <div class="full" *ngIf="process.state != 'empty'">
+      <h4><strong>Pid: </strong>{{process.pid.pid}}</h4>
+      <h3><strong>Tamaño: </strong>{{process.size}} k</h3>
+      <p><strong>Tiempo: </strong>{{process.pid.time}}</p>
+     </div>
+  </div>
+</div>
